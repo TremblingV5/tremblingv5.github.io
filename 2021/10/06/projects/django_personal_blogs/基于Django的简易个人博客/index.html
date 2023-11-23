@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>基于Django的简单个人博客 | zhengfei.xin</title>
+  <meta name="keywords" content="">
+  <meta name="description" content="基于Django的简单个人博客 | zhengfei.xin">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="前言2021年春考研结束后，看着自己的csdn账号，看着前两年发过的一篇小博客，决定还是要多少写一点博客之类的东西，毕竟可以拿来面试用~ 思前想后，决定还是自己搞一个“博客”项目（即本站https:&#x2F;&#x2F;zhengfei.xin）出来，然后再往上存东西，毕竟买来的服务器不能光放着。 其实我对Python的Web开发了解并不多，但是Python相对用的多一点，也就决定用Python来写，毕竟语言是次要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Django的简单个人博客">
+<meta property="og:url" content="https://tremblingv5.github.io/2021/10/06/projects/django_personal_blogs/%E5%9F%BA%E4%BA%8EDjango%E7%9A%84%E7%AE%80%E6%98%93%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:site_name" content="zhengfei.xin">
+<meta property="og:description" content="前言2021年春考研结束后，看着自己的csdn账号，看着前两年发过的一篇小博客，决定还是要多少写一点博客之类的东西，毕竟可以拿来面试用~ 思前想后，决定还是自己搞一个“博客”项目（即本站https:&#x2F;&#x2F;zhengfei.xin）出来，然后再往上存东西，毕竟买来的服务器不能光放着。 其实我对Python的Web开发了解并不多，但是Python相对用的多一点，也就决定用Python来写，毕竟语言是次要">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-06T15:04:02.000Z">
+<meta property="article:modified_time" content="2023-11-23T15:31:34.767Z">
+<meta property="article:author" content="Zhengfei Xin">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/darcula.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+<meta name="generator" content="Hexo 7.0.0"></head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="false" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Zhengfei Xin</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="github"
+               href="https://github.com/tremblingv5"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:zf.xin@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+    <a class="more-menus">更多菜单</a>
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(1)</small>
+            
+        </div>
+    </li>
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+                <a class="dynamic-menu site_url"
+                   
+                   href="/photo">相册</a>
+        
+            
+            
+                <a class="dynamic-menu site_url"
+                   
+                   target="_blank" rel="noopener" href="https://github.com/yelog">github</a>
+        
+    </div>
+    <div>
+        
+            <a class="about  site_url"
+               
+               href="/about">关于</a>
+        
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="1">
+<input type="hidden" id="yelog_site_word_count" value="1.7k">
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="http://yelog.org/">叶落阁</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+    </div>
+
+</div>
+
+    
+    <div id="local-search-result">
+
+    </div>
+    
+    <nav id="title-list-nav">
+        
+        
+        <a  class="全部文章 "
+           href="/2021/10/06/projects/django_personal_blogs/%E5%9F%BA%E4%BA%8EDjango%E7%9A%84%E7%AE%80%E6%98%93%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"
+           data-tag=""
+           data-author="" >
+            <span class="post-title" title="基于Django的简单个人博客">基于Django的简单个人博客</span>
+            <span class="post-date" title="2021-10-06 23:04:02">2021/10/06</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-projects/django_personal_blogs/基于Django的简易个人博客" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">基于Django的简单个人博客</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2023-11-23 23:31:34'>2021-10-06 23:04</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        <span>字数:1.7k</span>
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B"><span class="toc-text">技术选型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="toc-text">具体实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E7%88%B6%E7%B1%BB"><span class="toc-text">接口父类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5Markdown%E7%BC%96%E8%BE%91%E4%B8%8E%E8%A7%A3%E6%9E%90"><span class="toc-text">引入Markdown编辑与解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8EHaystack%E7%9A%84%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E"><span class="toc-text">基于Haystack的全文搜索引擎</span></a></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-6 i,
+    .toc-level-6 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>2021年春考研结束后，看着自己的csdn账号，看着前两年发过的一篇小博客，决定还是要多少写一点博客之类的东西，毕竟可以拿来面试用~</p>
+<p>思前想后，决定还是自己搞一个“博客”项目（即本站<a target="_blank" rel="noopener" href="https://zhengfei.xin)出来,然后再往上存东西,毕竟买来的服务器不能光放着./">https://zhengfei.xin）出来，然后再往上存东西，毕竟买来的服务器不能光放着。</a></p>
+<p>其实我对Python的Web开发了解并不多，但是Python相对用的多一点，也就决定用Python来写，毕竟语言是次要的，主要是想借这个东西练练手。不过也有计划后续再把这个博客改程Java + Vue的。</p>
+<h2 id="技术选型"><a href="#技术选型" class="headerlink" title="技术选型"></a>技术选型</h2><p>主要语言自然是Python，然后在Django和Flask这两个我略有使用的框架中选择了Django，主要还是我比较懒，选Django就直接把轮子都装个差不多了，省心！</p>
+<p>前端部分直接使用了Django的模板，然后从万能的互联网上去搜了几个静态的网页模板，就这样就准备好了这个网站的原材料。</p>
+<p>除开语言层面，我又掏出了MySQL和Redis，MySQL是必须的，Redis不是，主要是想把Redis塞进来，然后我就拥有了一个使用了Redis的项目√</p>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><blockquote>
+<p>关于Django和其他组件的基础使用此处就不再赘述</p>
+</blockquote>
+<h3 id="接口父类"><a href="#接口父类" class="headerlink" title="接口父类"></a>接口父类</h3><p>在我第一次写的时候，其实并没有搞一个父类出来，写了一大半之后，发现很多接口的代码重复度太高了，此时突然想起了OOP之类的，所以抽象出了几个类，作为所有接口的父类。</p>
+<p>首先是父类中的父类，所有接口都继承自这个父类,具体功能参照注释。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">AbstractApiView</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    CODE = <span class="number">500</span></span><br><span class="line">    <span class="comment"># 当访问接口为非json模式时，所要加载的模板文件</span></span><br><span class="line">    TEMPLATE = <span class="string">&quot;manage/404.html&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># post、get、delete方法均调用新定义的request_handle方法，统一处理数据</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">post</span>(<span class="params">self, requests</span>):</span><br><span class="line">        <span class="keyword">return</span> self.request_handle(self.post_solution, requests.POST, requests)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, requests</span>):</span><br><span class="line">        <span class="keyword">return</span> self.request_handle(self.get_solution, requests.GET, requests)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">delete</span>(<span class="params">self, requests</span>):</span><br><span class="line">        <span class="keyword">return</span> self.request_handle(self.delete_solution, requests.POST, requests)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 统一处理数据</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">request_handle</span>(<span class="params">self, method, methodType, request</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># 尝试通过相应的方法获取接口返回的数据</span></span><br><span class="line">            result = method(request)</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            self.CODE = <span class="number">500</span></span><br><span class="line">            result = &#123;&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 判断访问接口的类型，如果是json则返回json字符串，否则返回html页面</span></span><br><span class="line">        self.reqType = methodType.get(<span class="string">&quot;type&quot;</span>)</span><br><span class="line">        responseData = &#123;</span><br><span class="line">            <span class="string">&quot;code&quot;</span>: self.CODE,</span><br><span class="line">            <span class="string">&quot;message&quot;</span>: STATUS_INFO[self.CODE],</span><br><span class="line">            <span class="string">&quot;data&quot;</span>: result[<span class="string">&quot;data&quot;</span>] <span class="keyword">if</span> result <span class="keyword">not</span> <span class="keyword">in</span> [<span class="literal">None</span>, &#123;&#125;] <span class="keyword">else</span> &#123;&#125;,</span><br><span class="line">            <span class="string">&quot;config&quot;</span>: SITE_CONFIG</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> self.reqType == <span class="string">&quot;json&quot;</span>:</span><br><span class="line">            <span class="keyword">return</span> JsonResponse(self.data_wrap(responseData))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> HttpResponse(</span><br><span class="line">                loader.get_template(self.TEMPLATE).render(self.data_wrap(responseData), request)</span><br><span class="line">            )</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 数据包装函数，通过在子类中重写此方法，来对数据进行一些特有的处理和封装</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">data_wrap</span>(<span class="params">self, responseData</span>):</span><br><span class="line">        <span class="keyword">return</span> responseData</span><br><span class="line"></span><br><span class="line">    <span class="comment"># post、get、delete各自的处理方法</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">post_solution</span>(<span class="params">self, requests</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_solution</span>(<span class="params">self, requests</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">delete_solution</span>(<span class="params">self, requests</span>):</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来就是对不同访问情况的代码进行重写，例如：</p>
+<ol>
+<li>在简历页面，统一获取相关基本信息</li>
+<li>在后台管理页面，判断登录状态是否存在，若登录状态失效，则弹出登录页面</li>
+</ol>
+<p>再之后就是具体的各个接口的处理，有了以上两层封装，对于实际接口一般只需要定义好使用的数据库、要显示的页面模板即可，整体是降低了不少代码量的。</p>
+<h3 id="引入Markdown编辑与解析"><a href="#引入Markdown编辑与解析" class="headerlink" title="引入Markdown编辑与解析"></a>引入Markdown编辑与解析</h3><p>除以上访问接口的封装外，还添加了两个相对重要的组件。其一就是Markdown编辑与解析功能。</p>
+<p>对于Markdown的编辑，直接使用了mdeditor组件，Django有其定制化的Module。在<code>INSTALLED_APPS</code>中导入即可使用。</p>
+<p>在<code>settings.py</code>中可以对此编辑器进行配置，代码如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">MDEDITOR_CONFIGS = &#123;</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span>:&#123;</span><br><span class="line">        <span class="string">&#x27;width&#x27;</span>: <span class="string">&#x27;100%&#x27;</span>,  <span class="comment"># 自定义编辑框宽度</span></span><br><span class="line">        <span class="string">&#x27;heigth&#x27;</span>: <span class="string">&#x27;100%&#x27;</span>,   <span class="comment"># 自定义编辑框高度</span></span><br><span class="line">        <span class="string">&#x27;toolbar&#x27;</span>: [<span class="string">&quot;undo&quot;</span>, <span class="string">&quot;redo&quot;</span>, <span class="string">&quot;|&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;bold&quot;</span>, <span class="string">&quot;del&quot;</span>, <span class="string">&quot;italic&quot;</span>, <span class="string">&quot;quote&quot;</span>, <span class="string">&quot;|&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;list-ul&quot;</span>, <span class="string">&quot;list-ol&quot;</span>, <span class="string">&quot;hr&quot;</span>, <span class="string">&quot;|&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;link&quot;</span>, <span class="string">&quot;reference-link&quot;</span>, <span class="string">&quot;image&quot;</span>, <span class="string">&quot;code&quot;</span>, <span class="string">&quot;preformatted-text&quot;</span>, <span class="string">&quot;table&quot;</span>, <span class="string">&quot;datetime&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;emoji&quot;</span>, <span class="string">&quot;html-entities&quot;</span>, <span class="string">&quot;|&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;help&quot;</span>, <span class="string">&quot;info&quot;</span>,</span><br><span class="line">                    <span class="string">&quot;||&quot;</span>, <span class="string">&quot;preview&quot;</span>, <span class="string">&quot;watch&quot;</span>, <span class="string">&quot;fullscreen&quot;</span>],  <span class="comment"># 自定义编辑框工具栏</span></span><br><span class="line">        <span class="string">&#x27;upload_image_formats&#x27;</span>: [<span class="string">&quot;jpg&quot;</span>, <span class="string">&quot;jpeg&quot;</span>, <span class="string">&quot;gif&quot;</span>, <span class="string">&quot;png&quot;</span>, <span class="string">&quot;bmp&quot;</span>, <span class="string">&quot;webp&quot;</span>],  <span class="comment"># 图片上传格式类型</span></span><br><span class="line">        <span class="string">&#x27;image_folder&#x27;</span>: <span class="string">&#x27;mdImage&#x27;</span>,  <span class="comment"># 图片保存文件夹名称</span></span><br><span class="line">        <span class="string">&#x27;theme&#x27;</span>: <span class="string">&#x27;default&#x27;</span>,  <span class="comment"># 编辑框主题 ，dark / default</span></span><br><span class="line">        <span class="string">&#x27;preview_theme&#x27;</span>: <span class="string">&#x27;default&#x27;</span>,  <span class="comment"># 预览区域主题， dark / default</span></span><br><span class="line">        <span class="string">&#x27;editor_theme&#x27;</span>: <span class="string">&#x27;default&#x27;</span>,  <span class="comment"># edit区域主题，pastel-on-dark / default</span></span><br><span class="line">        <span class="string">&#x27;toolbar_autofixed&#x27;</span>: <span class="literal">True</span>,  <span class="comment"># 工具栏是否吸顶</span></span><br><span class="line">        <span class="string">&#x27;search_replace&#x27;</span>: <span class="literal">True</span>,  <span class="comment"># 是否开启查找替换</span></span><br><span class="line">        <span class="string">&#x27;emoji&#x27;</span>: <span class="literal">True</span>,  <span class="comment"># 是否开启表情功能</span></span><br><span class="line">        <span class="string">&#x27;tex&#x27;</span>: <span class="literal">True</span>,  <span class="comment"># 是否开启 tex 图表功能</span></span><br><span class="line">        <span class="string">&#x27;flow_chart&#x27;</span>: <span class="literal">True</span>,  <span class="comment"># 是否开启流程图功能</span></span><br><span class="line">        <span class="string">&#x27;sequence&#x27;</span>: <span class="literal">True</span>,  <span class="comment"># 是否开启序列图功能</span></span><br><span class="line">        <span class="string">&#x27;watch&#x27;</span>: <span class="literal">True</span>,  <span class="comment"># 实时预览</span></span><br><span class="line">        <span class="string">&#x27;lineWrapping&#x27;</span>: <span class="literal">True</span>,  <span class="comment"># 自动换行</span></span><br><span class="line">        <span class="string">&#x27;lineNumbers&#x27;</span>: <span class="literal">True</span>  <span class="comment"># 行号</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编辑好Markdown后，又需要一个解析的功能，对于解析则使用Python的Markdown模块，此模块功能已足够强大，支持数学公式，并且同样可以进行定制化。对此功能进行简单封装，如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> markdown</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">parse_md</span>(<span class="params">text</span>):</span><br><span class="line">    <span class="keyword">return</span> markdown.markdown(text.replace(<span class="string">&quot;\r\n&quot;</span>, <span class="string">&#x27; \n&#x27;</span>), extensions=[</span><br><span class="line">        <span class="string">&#x27;markdown.extensions.extra&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;markdown.extensions.codehilite&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;markdown.extensions.toc&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;mdx_math&#x27;</span>,</span><br><span class="line">    ])</span><br></pre></td></tr></table></figure>
+
+<p>解析好后，接下来就是对前端显示的样式调整，这个过程并不算难，只是做起来非常需要耐心。</p>
+<h3 id="基于Haystack的全文搜索引擎"><a href="#基于Haystack的全文搜索引擎" class="headerlink" title="基于Haystack的全文搜索引擎"></a>基于Haystack的全文搜索引擎</h3><p>另外，就是需要一个全文搜索引擎，可以对文章标题、介绍、正文等内容进行匹配，然后显示出搜索的结果。同样是贪图方便，暂时先选用了Haystack + Whoosh的方案。</p>
+<p>对于此模块的使用不再赘述，在使用过程中，由于不太满意搜索排序的结果，遂重写了相关代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">build_page</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    Paginates the results appropriately.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    In case someone does not want to use Django&#x27;s built-in pagination, it</span></span><br><span class="line"><span class="string">    should be a simple matter to override this method to do what they would</span></span><br><span class="line"><span class="string">    like.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        page_no = <span class="built_in">int</span>(self.request.GET.get(<span class="string">&quot;p&quot;</span>, <span class="number">1</span>))</span><br><span class="line">    <span class="keyword">except</span> (TypeError, ValueError):</span><br><span class="line">        <span class="keyword">raise</span> Http404(<span class="string">&quot;Not a valid number for page.&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> page_no &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">raise</span> Http404(<span class="string">&quot;Pages should be 1 or greater.&quot;</span>)</span><br><span class="line"></span><br><span class="line">    start_offset = (page_no - <span class="number">1</span>) * self.results_per_page</span><br><span class="line">    self.results = self.results.order_by(<span class="string">&quot;-id&quot;</span>)</span><br><span class="line">    self.results[start_offset : start_offset + self.results_per_page]</span><br><span class="line"></span><br><span class="line">    paginator = Paginator(self.results, self.results_per_page)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        page = paginator.page(page_no)</span><br><span class="line">    <span class="keyword">except</span> InvalidPage:</span><br><span class="line">        <span class="keyword">raise</span> Http404(<span class="string">&quot;No such page!&quot;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> (paginator, page)</span><br></pre></td></tr></table></figure>
+
+<p>另，通过如下代码，不直接通过接口访问搜索类，间接获得了搜索的结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Search(results_per_page=<span class="number">10</span>).__call__(requests).content</span><br></pre></td></tr></table></figure>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章进行讨论，同时欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以到github仓库中提Issue，也可以邮件至 zf.xin@qq.com </span>
+    </div>
+</article>
+
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    zhengfei.xin
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+<div class="mobile-menus-out" >
+
+</div>
+<div class="mobile-menus">
+    
+    
+    <a class="dynamic-menu site_url"   href="/photo">相册</a>
+    
+    
+    
+    <a class="dynamic-menu site_url"   target="_blank" rel="noopener" href="https://github.com/yelog">github</a>
+    
+</div>
+
+
+</html>
