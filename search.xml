@@ -4,11 +4,11 @@
   
     
     <entry>
-      <title>Test Article</title>
-      <link href="/2023/11/23/test-article/"/>
-      <url>/2023/11/23/test-article/</url>
+      <title>test article</title>
+      <link href="/2023/11/23/projects/django_personal_blogs/test-article/"/>
+      <url>/2023/11/23/projects/django_personal_blogs/test-article/</url>
       
-        <content type="html"><![CDATA[<h2 id="title"><a href="#title" class="headerlink" title="title"></a>title</h2><figure class="highlight python"><table><tr><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;hello world&#x27;</span>)<br></code></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h2 id="title"><a href="#title" class="headerlink" title="title"></a>title</h2><table><thead><tr><th align="center">test</th><th align="center">test</th></tr></thead><tbody><tr><td align="center">test</td><td align="center">test</td></tr></tbody></table><pre><code class="hljs go">fmt.Println(<span class="hljs-string">&quot;hello world&quot;</span>)</code></pre>]]></content>
       
       
       
